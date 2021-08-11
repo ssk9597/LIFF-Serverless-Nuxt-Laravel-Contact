@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Form from '@components/Template/Form.vue';
+import Form from '@/components/Template/Form.vue';
 export default {
   components: {
     Form,
@@ -16,6 +16,3 @@ export default {
     });
   },
 };
-</script>
-
-<style lang="scss" scoped></style>
