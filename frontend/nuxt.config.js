@@ -1,10 +1,10 @@
 require('dotenv').config();
-const { API_URL } = process.env;
+const { API_URL, LIFF_ID } = process.env;
 
 export default {
+  target: 'static',
   head: {
-    target: 'static',
-    title: 'frontend',
+    title: 'LIFFで作ったお問い合わせフォーム',
     htmlAttrs: {
       lang: 'ja',
     },
@@ -13,6 +13,7 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
     ],
+    script: [{ src: 'https://static.line-scdn.net/liff/edge/2/sdk.js' }],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
@@ -34,6 +35,7 @@ export default {
 
   env: {
     API_URL,
+    LIFF_ID,
   },
 
   proxy: {
