@@ -44,10 +44,10 @@
 </template>
 
 <script>
-import FormInput from '@/components/Atoms/FormInput.vue';
-import FormLabel from '@/components/Atoms/FormLabel.vue';
-import FormTextArea from '@/components/Atoms/FormTextArea.vue';
-import FormButton from '@/components/Atoms/FormButton.vue';
+import FormInput from '@/components/Atoms/FormInput';
+import FormLabel from '@/components/Atoms/FormLabel';
+import FormTextArea from '@/components/Atoms/FormTextArea';
+import FormButton from '@/components/Atoms/FormButton';
 
 export default {
   components: {

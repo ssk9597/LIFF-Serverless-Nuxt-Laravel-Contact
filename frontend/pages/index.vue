@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import Form from '@/components/Template/Form.vue';
-import FormInput from '@/components/Atoms/FormInput.vue';
+import Form from '@/components/Template/Form';
+import FormInput from '@/components/Atoms/FormInput';
 
 export default {
   components: {
