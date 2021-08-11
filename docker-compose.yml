@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  #bref
+  web:
+    image: bref/fpm-dev-gateway
+    ports:
+      - '$BACK_PORT:80'
+    volumes:
+      - .:/var/task
+    links:
+      - php
+    environment:
+      HANDLER: api/public/index.php
+      DOCUMENT_ROOT: api
+
+  # php
+  php:
+    image: bref/php-74-fpm-dev
+    volumes:
+      - .:/var/task:ro
+
+  # node,nuxt(front)
+  front:
+    build:
+      context: .
+      dockerfile: ./docker/node/Dockerfile
+    command: yarn dev
+    volumes:
+      - ./frontend:/app
+      - ./app/node_modules
+    ports:
+      - '$FRONT_PORT:3000'
+      - '$STORYBOOK_PORT:6006'
+    init: true
+    restart: on-failure

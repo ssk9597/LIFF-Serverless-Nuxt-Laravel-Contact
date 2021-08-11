@@ -1,0 +1,80 @@
+# サービス名(Lambda関数の関数名が「サービス名-ステージ名-関数名」となる)
+service: laravel-docker-bref
+
+provider:
+  # awsにデプロイする
+  name: aws
+  # 東京リージョンにデプロイする
+  region: ap-northeast-1
+  # ステージ名
+  stage: dev
+  # ランタイムの設定
+  runtime: provided.al2
+  # Lambdaバージョンのハッシュの解決(warningが出るので対応)
+  lambdaHashingVersion: 20201221
+  iam.role.statements:
+    # DynamoDBの権限をLambdaに付与する
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: 'arn:aws:dynamodb:*:*:table/*'
+
+package:
+  # 指定したディレクトリを展開から除外する
+  patterns:
+    - node_modules/**
+    - public/storage
+    - resources/assets/**
+    - storage/**
+    - tests/**
+
+functions:
+  # この関数は、Laravelのウェブサイト/APIを実行する
+  web:
+    # HTTPのリクエストが来たときに呼び出されるファイル
+    handler: public/index.php
+    # API Gatewayのタイムアウトは29秒
+    timeout: 28
+    # php7.4を使用する
+    layers:
+      - ${bref:layer.php-74-fpm}
+    # API Gateway
+    events:
+      - httpApi: '*'
+  # Lambdaでartisanのコマンドを実行することができるようにする
+  artisan:
+    handler: artisan
+    timeout: 120
+    layers:
+      - ${bref:layer.php-74}
+      - ${bref:layer.console}
+
+resources:
+  Resources:
+    # DynamoDB（ここはTableNameと一緒の方が綺麗）
+    usersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        # テーブル名
+        TableName: usersTable
+        # キーの型を指定
+        AttributeDefinitions:
+          - AttributeName: email
+            AttributeType: S
+        # キーの種類を指定（ハッシュもしくはレンジ）
+        KeySchema:
+          - AttributeName: email
+            KeyType: HASH
+        # プロビジョニングするキャパシティーユニットの設定
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+
+plugins:
+  # プラグインの読み込み
+  - ./vendor/bref/bref
