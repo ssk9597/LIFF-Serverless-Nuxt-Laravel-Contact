@@ -1,9 +1,15 @@
 <template>
-  <div></div>
+  <div>
+    <Form />
+  </div>
 </template>
 
 <script>
+import Form from '@components/Template/Form.vue';
 export default {
+  components: {
+    Form,
+  },
   mounted() {
     window.liff.init({
       liffId: process.env.LIFF_ID,
@@ -12,5 +18,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
