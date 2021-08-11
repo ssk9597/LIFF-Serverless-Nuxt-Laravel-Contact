@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h2>こんにちは</h2>
     <Form />
   </div>
 </template>
