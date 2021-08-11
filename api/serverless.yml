@@ -57,18 +57,18 @@ functions:
 resources:
   Resources:
     # DynamoDB（ここはTableNameと一緒の方が綺麗）
-    usersTable:
+    contact:
       Type: AWS::DynamoDB::Table
       Properties:
         # テーブル名
-        TableName: usersTable
+        TableName: Nuxt_Laravel_Contact
         # キーの型を指定
         AttributeDefinitions:
-          - AttributeName: email
+          - AttributeName: id
             AttributeType: S
         # キーの種類を指定（ハッシュもしくはレンジ）
         KeySchema:
-          - AttributeName: email
+          - AttributeName: id
             KeyType: HASH
         # プロビジョニングするキャパシティーユニットの設定
         ProvisionedThroughput:

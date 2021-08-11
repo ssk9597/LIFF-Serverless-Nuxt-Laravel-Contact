@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2.5|^8.0",
+        "aws/aws-sdk-php": "^3.189",
         "bref/bref": "^1.2",
         "bref/laravel-bridge": "^1.1",
         "fideloper/proxy": "^4.4",
