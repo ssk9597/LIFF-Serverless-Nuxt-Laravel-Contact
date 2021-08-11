@@ -64,11 +64,6 @@ export default {
       contact: '',
     };
   },
-  mounted() {
-    window.liff.init({
-      liffId: process.env.LIFF_ID,
-    });
-  },
   methods: {
     async submit() {
       try {

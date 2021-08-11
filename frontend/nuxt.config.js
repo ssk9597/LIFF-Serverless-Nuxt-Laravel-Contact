@@ -19,7 +19,7 @@ export default {
 
   css: [],
 
-  plugins: [],
+  plugins: [{ src: '@/plugins/vee-validate' }],
 
   components: true,
 
@@ -47,5 +47,7 @@ export default {
     browserBaseURL: process.env.API_URL,
   },
 
-  build: {},
+  build: {
+    transpile: ['vee-validate/dist/rules'],
+  },
 };
