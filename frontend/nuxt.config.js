@@ -1,9 +1,9 @@
 require('dotenv').config();
-const { API_URL } = process.env;
+const { API_URL, LIFF_ID } = process.env;
 
 export default {
+  target: 'static',
   head: {
-    target: 'static',
     title: 'LIFFで作ったお問い合わせフォーム',
     htmlAttrs: {
       lang: 'ja',
@@ -35,6 +35,7 @@ export default {
 
   env: {
     API_URL,
+    LIFF_ID,
   },
 
   proxy: {
